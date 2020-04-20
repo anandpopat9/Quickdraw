@@ -5,7 +5,7 @@ import './App.css';
 import Canvas from './Canvas'
 import PaletteItem from '../components/PaletteItem'
 
-import { setTool, newDrawing } from '../actions'
+import { setTool, newDrawing, undo, redo } from '../actions'
 import { Elements } from '../elements'
 
 import deleteIcon from './img/delete.svg'
@@ -27,13 +27,14 @@ class App extends Component {
   }
 
   render() {
+    const { isUndoEnabled, isRedoEnabled } = this.props;
     return (
       <div className="App">
         <header className="App-header">Quickdraw!</header>
         <div className="ui-container">
             <div className="palette">
-              {this.actionButton({icon: undoIcon, name: 'Undo', enabled: false, action: ()=>{}})}
-              {this.actionButton({icon: redoIcon, name: 'Redo', enabled: false, action: ()=>{}})}
+              {this.actionButton({icon: undoIcon, name: 'Undo', enabled: isUndoEnabled, action: undo()})}
+              {this.actionButton({icon: redoIcon, name: 'Redo', enabled: isRedoEnabled, action: redo()})}
               {this.actionButton({icon: newIcon, name: 'New', action: newDrawing()})}
               {this.toolButton({icon: deleteIcon, name: 'Delete', enabled: false})}
               {this.toolButton({icon: moveIcon, name: 'Move', enabled: false})}
@@ -49,7 +50,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  tool: state.tool
+  tool: state.tool,
+  isUndoEnabled: state.commands.do.length > 0, 
+  isRedoEnabled: state.commands.redo.length > 0, 
 })
 
 export default connect(mapStateToProps)(App);

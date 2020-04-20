@@ -19,7 +19,6 @@ export default class Rect {
     }
 
     isHit(pt) {
-        // return distToSegment(pt, this.start, this.end) <= HIT_DISTANCE;
-        return false;
+        throw new Error('isHit not implemented for Rect!');
     }
 }

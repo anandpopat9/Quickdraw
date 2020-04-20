@@ -8,9 +8,23 @@ const commands = (state = {do: [], redo: [], transient: []}, action) => {
             if (action.payload.isTransient) {
                 return {...state, transient: [action]}
             }
-            return {...state, do: [...state.do, action], transient: []};
+            return {...state, do: [...state.do, action], redo: [], transient: []};
         case Actions.NEW_DRAWING:
-            return {do: [], redo: [], transient: []}
+            return {do: [], redo: [], transient: []};
+        case Actions.UNDO:
+            return {
+                ...state, 
+                do: state.do.slice(0, state.do.length - 1),
+                redo: [state.do[state.do.length - 1], ...state.redo],
+                transient: []
+            };
+        case Actions.REDO:
+            return {
+                ...state, 
+                do: [...state.do, state.redo[0]],
+                redo: state.redo.slice(1),
+                transient: []
+            };
         default:
     }
     return {...state};

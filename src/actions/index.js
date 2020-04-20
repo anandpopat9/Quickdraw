@@ -7,6 +7,8 @@ export const Actions = {
   DRAG_START: "DRAG_START",
   DRAG_FINISH: "DRAG_FINISH",
   SET_TOOL: "SET_TOOL",
+  UNDO: "UNDO",
+  REDO: "REDO",
 };
 
 let nextElementId = 0;
@@ -38,4 +40,12 @@ export const newDrawing = () => ({
 export const setTool = (payload) => ({
   type: Actions.SET_TOOL,
   payload,
+});
+
+export const undo = () => ({
+  type: Actions.UNDO,
+});
+
+export const redo = () => ({
+  type: Actions.REDO,
 });
