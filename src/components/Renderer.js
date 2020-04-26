@@ -23,7 +23,7 @@ export default class Renderer extends Component {
     if (this.ctx) {
         this.ctx.fillStyle = 'white';
         this.ctx.fillRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
-        for (const element of Object.values(this.props.elements)) {
+        for (const element of this.props.elements.values()) {
             element.draw(this.ctx);
         }
     }

@@ -20,10 +20,10 @@ export const createElementAction = (payload) => ({
 });
 
 registerActionAsCommand(Actions.CREATE_ELEMENT, (action, elements) => {
-  elements[action.payload.id] = createElement(
+  elements.set(action.payload.id, createElement(
     action.payload.type,
     action.payload
-  );
+  ));
 });
 
 export const dragStart = (payload) => ({
@@ -58,7 +58,7 @@ export const deleteElementAction = (id) => ({
 });
 
 registerActionAsCommand(Actions.DELETE_ELEMENT, (action, elements) => {
-  delete elements[action.id];
+  elements.delete(action.id);
 });
 
 export const moveElementAction = (payload) => ({
@@ -67,6 +67,10 @@ export const moveElementAction = (payload) => ({
 });
 
 registerActionAsCommand(Actions.MOVE_ELEMENT, (action, elements) => {
-  elements[action.payload.id].start = action.payload.p1;
-  elements[action.payload.id].end = action.payload.p2;
+  const element = elements.get(action.payload.id);
+  element.start = action.payload.p1;
+  element.end = action.payload.p2;
+  
+  elements.delete(action.payload.id);
+  elements.set(action.payload.id, element);
 });

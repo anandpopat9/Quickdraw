@@ -1,7 +1,7 @@
 export default class DeleteElementTool {
 
   findSelectedElement = (props, pos) => {
-    const elements = Object.values(props.elements);
+    const elements = Array.from(props.elements.values());
     for (let i = elements.length - 1; i >= 0; i--) {
       if (elements[i].isHit(pos))
         return elements[i];

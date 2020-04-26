@@ -4,7 +4,7 @@ import runCommand from '../actions/runCommand'
 import Renderer from '../components/Renderer'
 
 const processCommandsIntoElements = (commands) => {
-    const elements = {};
+    const elements = new Map();
     for (const command of [...commands.do, ...commands.transient]) {
         runCommand(command, elements);
     }
