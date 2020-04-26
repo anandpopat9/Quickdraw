@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { createElementAction, dragStart, dragFinish } from '../actions'
+import { createElementAction, dragStart, dragFinish, deleteElementAction, moveElementAction } from '../actions'
 import runCommand from '../actions/runCommand'
 import Renderer from '../components/Renderer'
 
@@ -17,7 +17,7 @@ const processCommandsIntoElements = (commands) => {
     interaction: state.interaction
   })
   
-  const mapDispatchToProps = { createElementAction, dragStart, dragFinish };
+  const mapDispatchToProps = { createElementAction, dragStart, dragFinish, deleteElementAction, moveElementAction };
   
   export default connect(
     mapStateToProps,

@@ -1,6 +1,6 @@
 import { distToSegment } from './geometry'
 
-const HIT_DISTANCE = 1.5;
+const HIT_DISTANCE = 5.5;
 
 export default class Line {
     constructor({ p1, p2, id }) {

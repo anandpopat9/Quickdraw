@@ -9,6 +9,8 @@ export const Actions = {
   SET_TOOL: "SET_TOOL",
   UNDO: "UNDO",
   REDO: "REDO",
+  DELETE_ELEMENT: "DELETE_ELEMENT",
+  MOVE_ELEMENT: "MOVE_ELEMENT",
 };
 
 let nextElementId = 0;
@@ -48,4 +50,23 @@ export const undo = () => ({
 
 export const redo = () => ({
   type: Actions.REDO,
+});
+
+export const deleteElementAction = (id) => ({
+  type: Actions.DELETE_ELEMENT,
+  id: id,
+});
+
+registerActionAsCommand(Actions.DELETE_ELEMENT, (action, elements) => {
+  delete elements[action.id];
+});
+
+export const moveElementAction = (payload) => ({
+  type: Actions.MOVE_ELEMENT,
+  payload: payload,
+});
+
+registerActionAsCommand(Actions.MOVE_ELEMENT, (action, elements) => {
+  elements[action.payload.id].start = action.payload.p1;
+  elements[action.payload.id].end = action.payload.p2;
 });

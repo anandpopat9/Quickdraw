@@ -4,6 +4,7 @@ import { Elements } from '../elements'
 
 const commands = (state = {do: [], redo: [], transient: []}, action) => {
     switch (action.type) {
+        case Actions.MOVE_ELEMENT:
         case Actions.CREATE_ELEMENT:
             if (action.payload.isTransient) {
                 return {...state, transient: [action]}
@@ -25,6 +26,8 @@ const commands = (state = {do: [], redo: [], transient: []}, action) => {
                 redo: state.redo.slice(1),
                 transient: []
             };
+        case Actions.DELETE_ELEMENT:
+            return {...state, do: [...state.do, action], redo: [], transient: []};
         default:
     }
     return {...state};

@@ -9,6 +9,8 @@ const registerConstructor = (type, cls) => {
 export const Elements = {
     Line: 'Line',
     Rect: 'Rect',
+    Delete: 'Delete',
+    Move: 'Move',
 }
 
 export const createElement = (type, data) => {

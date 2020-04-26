@@ -36,8 +36,8 @@ class App extends Component {
               {this.actionButton({icon: undoIcon, name: 'Undo', enabled: isUndoEnabled, action: undo()})}
               {this.actionButton({icon: redoIcon, name: 'Redo', enabled: isRedoEnabled, action: redo()})}
               {this.actionButton({icon: newIcon, name: 'New', action: newDrawing()})}
-              {this.toolButton({icon: deleteIcon, name: 'Delete', enabled: false})}
-              {this.toolButton({icon: moveIcon, name: 'Move', enabled: false})}
+              {this.toolButton({icon: deleteIcon, name: Elements.Delete})}
+              {this.toolButton({icon: moveIcon, name: Elements.Move})}
               {this.toolButton({icon: lineIcon, name: Elements.Line})}
               {this.toolButton({icon: rectIcon, name: Elements.Rect})}
               {this.toolButton({icon: ellipseIcon, name: 'Ellipse', enabled: false})}
