@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Renderer.css'
 import { getTool } from '../tools'
+import { saveCommandsRequest } from "../requests"
 
 export default class Renderer extends Component {
   componentDidMount() {
@@ -40,6 +41,7 @@ export default class Renderer extends Component {
         }}
         onMouseUp={(e) => {
             getTool(this.props.tool).handleMouseUp(this.props, this.getMousePos(e));
+            setTimeout(() => saveCommandsRequest(this.props.commands), 500);
         }}
       /></div>);
   }

@@ -28,6 +28,8 @@ const commands = (state = {do: [], redo: [], transient: []}, action) => {
             };
         case Actions.DELETE_ELEMENT:
             return {...state, do: [...state.do, action], redo: [], transient: []};
+        case Actions.RECEIVE_COMMANDS:
+            return { ...state, ...action.payload}
         default:
     }
     return {...state};

@@ -16,10 +16,14 @@ import moveIcon from './img/move.svg'
 import rectIcon from './img/rect.svg'
 import ellipseIcon from './img/ellipse.svg'
 import newIcon from './img/new.svg'
+import { saveCommandsRequest } from '../requests';
 
 class App extends Component {
   actionButton({icon, name, action, enabled = true}) {
-    return <PaletteItem enabled={enabled} icon={icon} name={name} tool={this.props.tool} clickAction={()=>this.props.dispatch(action)}/>
+    return <PaletteItem enabled={enabled} icon={icon} name={name} tool={this.props.tool} clickAction={()=>{
+      this.props.dispatch(action);
+      setTimeout(() => saveCommandsRequest(this.props.commands), 500);
+    }}/>
   }
   
   toolButton({icon, name, enabled = true}) {
@@ -52,7 +56,8 @@ class App extends Component {
 const mapStateToProps = state => ({
   tool: state.tool,
   isUndoEnabled: state.commands.do.length > 0, 
-  isRedoEnabled: state.commands.redo.length > 0, 
+  isRedoEnabled: state.commands.redo.length > 0,
+  commands: state.commands,
 })
 
 export default connect(mapStateToProps)(App);

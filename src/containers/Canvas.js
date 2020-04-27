@@ -14,7 +14,8 @@ const processCommandsIntoElements = (commands) => {
   const mapStateToProps = state => ({
     elements: processCommandsIntoElements(state.commands),
     tool: state.tool,
-    interaction: state.interaction
+    interaction: state.interaction,
+    commands: state.commands,
   })
   
   const mapDispatchToProps = { createElementAction, dragStart, dragFinish, deleteElementAction, moveElementAction };

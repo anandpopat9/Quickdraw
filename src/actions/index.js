@@ -1,5 +1,6 @@
 import { registerActionAsCommand } from "./runCommand";
 import { createElement } from "../elements";
+import { fetchCommandsRequest } from "../requests";
 
 export const Actions = {
   CREATE_ELEMENT: "CREATE_ELEMENT",
@@ -11,6 +12,8 @@ export const Actions = {
   REDO: "REDO",
   DELETE_ELEMENT: "DELETE_ELEMENT",
   MOVE_ELEMENT: "MOVE_ELEMENT",
+  //REQUEST_COMMANDS: "REQUEST_COMMANDS",
+  RECEIVE_COMMANDS: "RECEIVE_COMMANDS",
 };
 
 let nextElementId = 0;
@@ -74,3 +77,16 @@ registerActionAsCommand(Actions.MOVE_ELEMENT, (action, elements) => {
   elements.delete(action.payload.id);
   elements.set(action.payload.id, element);
 });
+
+export const receiveCommands = (payload) => ({
+  type: Actions.RECEIVE_COMMANDS,
+  payload: payload
+});
+
+export const fetchCommands = () => {
+  return dispatch => {
+    return fetchCommandsRequest()
+      .then(response => response.json())
+      .then(data => dispatch(receiveCommands(JSON.parse(data))))
+  }
+}
