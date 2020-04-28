@@ -22,6 +22,8 @@ app.get('/', function (req, res) {
 });
 
 const dataFileName = 'data.json';
+
+// Loads redux state from data stored on disk.
 app.get('/load', function(req, res) {
   fs.readFile(dataFileName, 'utf-8', (err, data) => {
     if (err) {
@@ -42,6 +44,7 @@ app.get('/load', function(req, res) {
   })
 });
 
+// Store redux state on disk
 app.post('/save', function(req, res) {
   console.log(req);
   fs.writeFile(dataFileName, JSON.stringify(req.body), (err) => {
