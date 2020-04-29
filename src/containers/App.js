@@ -19,10 +19,14 @@ import newIcon from './img/new.svg'
 import { saveCommandsRequest } from '../requests';
 
 class App extends Component {
+  componentDidUpdate(prevProps) {
+    if (prevProps.commands.do !== this.props.commands.do) {
+      saveCommandsRequest(this.props.commands);
+    }
+  }
   actionButton({icon, name, action, enabled = true}) {
     return <PaletteItem enabled={enabled} icon={icon} name={name} tool={this.props.tool} clickAction={()=>{
       this.props.dispatch(action);
-      setTimeout(() => saveCommandsRequest(this.props.commands), 500);
     }}/>
   }
   
